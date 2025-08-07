@@ -1,11 +1,9 @@
-# render.yaml
 services:
   - type: web
-    name: fastapi-scan-app
+    name: ingredient-scanner
     runtime: python
-    buildCommand: ""
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11
-    autoDeploy: true
+      - key: PYTHONUNBUFFERED
+        value: "1"

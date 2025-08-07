@@ -1,4 +1,3 @@
-# ocr_service.py
 import easyocr
 import re
 
@@ -7,7 +6,7 @@ def get_reader():
 
 def extract_ingredients_from_image(image_path):
     try:
-        reader = get_reader()  # Lazy loading
+        reader = get_reader()
         result = reader.readtext(image_path, detail=0)
         full_text = " ".join(result)
 

@@ -6,6 +6,5 @@ python-multipart
 fpdf
 easyocr
 Pillow
-scikit-learn
-python-jose
 scikit-learn==1.6.1
+python-jose
