@@ -6,3 +6,4 @@ python-multipart
 fpdf
 easyocr
 Pillow
+scikit-learn
