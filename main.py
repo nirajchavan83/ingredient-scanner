@@ -1,9 +1,13 @@
 from fastapi import FastAPI
+from database import Base, engine 
 from fastapi.middleware.cors import CORSMiddleware
 from routers import classify_router, auth_router
 import os
 
 app = FastAPI(title="Ingredient Scanner API")
+
+Base.metadata.create_all(bind=engine)
+
 
 app.add_middleware(
     CORSMiddleware,
