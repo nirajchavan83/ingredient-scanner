@@ -26,3 +26,11 @@ def root():
 
 app.include_router(auth_router.router, prefix="/api")
 app.include_router(classify_router.router, prefix="/api")
+
+@app.get("/debug/files")
+def debug_files():
+    import os
+    try:
+        return {"model_files": os.listdir("model")}
+    except Exception as e:
+        return {"error": str(e)}
