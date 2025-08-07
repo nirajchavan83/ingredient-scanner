@@ -8,3 +8,4 @@ easyocr
 Pillow
 scikit-learn
 python-jose
+scikit-learn==1.6.1
