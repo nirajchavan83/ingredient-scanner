@@ -27,3 +27,7 @@ if not os.path.exists("static/uploads"):
 # ✅ Register your API routers
 app.include_router(auth_router.router, prefix="/api")
 app.include_router(classify_router.router, prefix="/api")
+
+@app.get("/", tags=["Root"])
+def root():
+    return {"message": "Welcome to Ingredient Scanner API 👋"}
