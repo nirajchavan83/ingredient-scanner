@@ -17,3 +17,19 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise HTTPException(status_code=404, detail="User not found")
 
     return user
+
+from typing import Optional
+from fastapi import Request
+
+def get_current_user_optional(
+    token: Optional[str] = Depends(oauth2_scheme),
+    db: Session = Depends(get_db)
+) -> Optional[User]:
+    if not token:
+        return None
+    try:
+        payload = verify_access_token(token)
+        user = db.query(User).filter(User.id == payload.get("user_id")).first()
+        return user
+    except:
+        return None

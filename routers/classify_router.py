@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, Query, UploadFile, File, Depends
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
@@ -8,7 +9,7 @@ from services.ocr_service import extract_ingredients_from_image
 from services.classify_service import classify_ingredients
 from services.recommendation_service import generate_recommendation, assess_suitability, get_health_score
 from models.user import User
-from dependencies import get_current_user
+from dependencies import get_current_user, get_current_user_optional
 
 import shutil
 import uuid
@@ -26,7 +27,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 @router.post("/ocr")
 async def ocr_image(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_current_user_optional)  # ✅ safe for Swagger
 ):
     file_ext = file.filename.split('.')[-1]
     file_path = os.path.join(UPLOAD_DIR, f"{uuid.uuid4()}.{file_ext}")
